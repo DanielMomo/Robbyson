@@ -10,6 +10,7 @@ const reducer = (prevState, action)=>{
                     var temp = Object.assign({}, t);
                     if(temp._id===action.payload) {
                         temp.done = !t.done
+                        axios.put(`/todos/${action.payload}`, temp)
                     }; 
                     return temp;
                 })
@@ -20,11 +21,13 @@ const reducer = (prevState, action)=>{
                     var temp = Object.assign({}, t);
                     if(temp._id===action.payload) {
                         temp.hide = !t.hide
+                        axios.put(`/todos/${action.payload}`, temp)
                     }; 
                     return temp;
                 })
             };
         case "REMOVE":
+            axios.delete(`/todos/${action.payload}`);
             return {
                 todos:prevState.todos.filter(todo=>todo._id !==action.payload)   
             }
