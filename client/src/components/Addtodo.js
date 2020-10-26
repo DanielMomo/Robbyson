@@ -13,9 +13,17 @@ export default class Addtodo extends Component {
     update=(e)=>{
         this.setState({
             description:e.target.value,
-            duedate: Date.now(),
-            done: false,
-            hide: false,
+            duedate:this.state.duedate,
+            done:this.state.done,
+            hide:this.state.hide,
+        })
+    }
+    updateDate=(e)=>{
+        this.setState({
+            description:this.state.description,
+            duedate:e.target.value,
+            done:this.state.done,
+            hide:this.state.hide,
         })
     }
     add=(dispatch, e)=>{
@@ -32,6 +40,8 @@ export default class Addtodo extends Component {
                 return  <form onSubmit={this.add.bind(this, dispatch)}>
                 <input type="text" className="form-control rounded-0" placeholder='Tarefa...'
                  onChange={this.update} value={this.state.description}/>
+                 <input type="date" className="form-control rounded-0"
+                  onChange={this.updateDate} value={this.state.duedate}/>
                 <button type='submit' className="form-control rounded-0 btn-secondary">Adicionar Tarefa
                 </button>
             </form>

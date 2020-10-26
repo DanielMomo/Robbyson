@@ -28,6 +28,11 @@ const Todo = mongoose.model('todo', todoSchema);
 app.get("/todos", (req, res)=>{
     Todo.find().then(todo=>res.json(todo))
 })
+app.get("/todos/:search", (req, res)=>{
+    var search = req.params.search
+    var replaceSearch = seach.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    Todo.find({description: new RegExp('^'+replaceSearch+'$', "i")}).then(todo=>res.json(todo));
+})
 
 app.post("/todos", (req, res)=>{
     const newTodo = new Todo({
@@ -51,6 +56,8 @@ app.delete("/todos/:id", (req, res)=>{
     .then(()=>res.json({ remove : true}))
 })
 
-app.listen(5000, ()=>{
-    console.log("Server is running at port 5000")
+const port = process.env.PORT || 5000;
+
+app.listen(port, ()=>{
+    console.log(`Server is running at port ${port}!`)
 })

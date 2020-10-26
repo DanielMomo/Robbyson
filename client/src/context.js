@@ -26,6 +26,19 @@ const reducer = (prevState, action)=>{
                     return temp;
                 })
             };
+        case "SAVE":
+            console.log(action);
+            return {
+                todos: prevState.todos.map(t => {
+                    var temp = Object.assign({}, t);
+                    if(temp._id===action.payload) {
+                        temp.description = action.description
+                        temp.duedate = action.duedate
+                        axios.put(`/todos/${action.payload}`, temp)
+                    }; 
+                    return temp;
+                })
+            };
         case "REMOVE":
             axios.delete(`/todos/${action.payload}`);
             return {
@@ -36,6 +49,7 @@ const reducer = (prevState, action)=>{
                 todos: [...prevState.todos , action.payload]
             }
         default:
+            console.log(action);
             return prevState
     }
 }
