@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Consumer} from '../context'
+import Moment from 'moment';
 
 export default class Todo extends Component {
     state = {
@@ -80,19 +81,30 @@ export default class Todo extends Component {
         return (
             <Consumer>{value=>{
                 const {dispatch} = value;
-                return <h3 className='text-dark text-center p-1 bg-light border-bottom' style={this.style()}>
-                    <div style={{ display: (this.state.edit ? 'none' : 'block') }}>
-                        <i className='far fa-times-circle fa-sm float-left m-1 text-danger' onClick={this.remove.bind(this, _id, dispatch)}></i>
-                        <input type="checkbox" className='m-2 float-right' onChange={this.toggle.bind(this,_id,dispatch)} defaultChecked={this.props.todo.done} />
-                        <i className='fas fa-archive fa-sm float-left m-1 text-warning' onClick={this.archive.bind(this, _id, dispatch)} style={this.styleCanArchive()}></i>{description}
-                        <span className='duedate'> {duedate}</span>
-                        <i className='fas fa-edit fa-sm float-left m-1' onClick={this.enable.bind(this, _id, dispatch)}></i>
+                return <h3 className='text-dark text-center p-1' style={this.style()}>
+                    <div className='mb-3 border' style={{ display: (this.state.edit ? 'none' : 'block') }}>
+                        <div className="input-group-prepend">
+                            <div className='description'>
+                                <input type="checkbox" className='m-3' onChange={this.toggle.bind(this,_id,dispatch)} defaultChecked={this.props.todo.done} />
+                                {description}
+                            </div>
+                            <div className='duedate'>
+                                {Moment(duedate).format('D/M/Y')}
+                                <i className='far fa-times-circle fa-sm float-right m-1 text-danger' onClick={this.remove.bind(this, _id, dispatch)}></i>
+                                <i className='fas fa-archive fa-sm float-right m-1 text-warning' onClick={this.archive.bind(this, _id, dispatch)} style={this.styleCanArchive()}></i>
+                                <i className='fas fa-edit fa-sm float-right m-1' onClick={this.enable.bind(this, _id, dispatch)}></i>
+                            </div>
+                        </div>
                     </div>
-                    <div style={{ display: (this.state.edit ? 'block' : 'none') }}>
-                        <input type="text" className="rounded-0 m-1" placeholder='Tarefa...' onChange={this.edit} value={this.state.editValue}/>
-                        <input type="date" className="rounded-0 m-1" onChange={this.editDate} value={this.state.editDate}/>
-                        <i className='fas fa-ban fa-sm float-right m-1' onClick={this.cancel.bind(this, _id, dispatch)}></i>
-                        <i className='fas fa-check-circle fa-sm float-right m-1' onClick={this.save.bind(this, _id, dispatch)}></i>
+                    <div className='card' style={{ display: (this.state.edit ? 'block' : 'none') }}>
+                        <div className="card-body">
+                            <div class="input-group">    
+                                <input type="text" className="rounded-0 form-control m-1" placeholder='Tarefa...' onChange={this.edit} value={this.state.editValue}/>
+                                <input type="date" className="rounded-0 form-control m-1" onChange={this.editDate} value={this.state.editDate}/>
+                            </div>
+                            <i className='fas fa-ban fa-sm float-right m-1 text-danger' onClick={this.cancel.bind(this, _id, dispatch)}></i>
+                            <i className='fas fa-check-circle fa-sm float-right m-1 text-success' onClick={this.save.bind(this, _id, dispatch)}></i>
+                        </div>
                     </div>
                 </h3>
             }}</Consumer>
