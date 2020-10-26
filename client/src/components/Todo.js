@@ -89,7 +89,7 @@ export default class Todo extends Component {
                                 {description}
                             </div>
                             <div className='duedate'>
-                                {Moment(duedate).utc().format('D/M/Y')}
+                                {Moment.utc(duedate).format('D/M/Y')}
                                 <i className='far fa-times-circle fa-sm float-right m-1 text-danger' onClick={this.remove.bind(this, _id, dispatch)}></i>
                                 <i className='fas fa-archive fa-sm float-right m-1 text-warning' onClick={this.archive.bind(this, _id, dispatch)} style={this.styleCanArchive()}></i>
                                 <i className='fas fa-edit fa-sm float-right m-1' onClick={this.enable.bind(this, _id, dispatch)}></i>
