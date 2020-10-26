@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+    frontend:
+        build:
+            context: ./client
+            dockerfile: DOCKERFILE.client
+        volumes:
+            - ./client:/usr/app
+        expose:
+            - "3000"
+        ports:
+            - "3000:3000"
+        links:
+            - backend
+        depends_on:
+            - backend
+    backend:
+        build:
+            context: ./server
+            dockerfile: DOCKERFILE.server
+        volumes:
+            - ./server:/usr/app
+        ports:
+            - "5000:5000"
+        expose:
+            - "5000"

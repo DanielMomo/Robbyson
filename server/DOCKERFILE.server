@@ -1,0 +1,9 @@
+FROM node:13-alpine
+
+WORKDIR /usr/app
+COPY . .
+
+RUN npm ci -qy
+
+EXPOSE 5000
+CMD ["npm", "start"]
