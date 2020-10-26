@@ -39,15 +39,15 @@ export default class Addtodo extends Component {
                 const { dispatch } = value
                 return  <form onSubmit={this.add.bind(this, dispatch)}>
                     
-                <div class="input-group">
+                <div ClassName="input-group">
                     
-                    <input type="text" class="form-control" placeholder='Tarefa...'
+                    <input type="text" className="form-control" placeholder='Tarefa...'
                         onChange={this.update} value={this.state.description}></input>
 
                     <input type="date" className="form-control rounded-0"
                         onChange={this.updateDate} value={this.state.duedate}/>
 
-                    <div class="input-group-prepend">
+                    <div className="input-group-prepend">
                         <button type='submit' className="btnform-control rounded-0 btn-secondary">Adicionar Tarefa
                         </button>
                     </div>

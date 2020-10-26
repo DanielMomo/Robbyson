@@ -98,7 +98,7 @@ export default class Todo extends Component {
                     </div>
                     <div className='card' style={{ display: (this.state.edit ? 'block' : 'none') }}>
                         <div className="card-body">
-                            <div class="input-group">    
+                            <div className="input-group">    
                                 <input type="text" className="rounded-0 form-control m-1" placeholder='Tarefa...' onChange={this.edit} value={this.state.editValue}/>
                                 <input type="date" className="rounded-0 form-control m-1" onChange={this.editDate} value={this.state.editDate}/>
                             </div>
